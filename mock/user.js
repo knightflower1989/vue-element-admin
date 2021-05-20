@@ -1,9 +1,9 @@
 
 const tokens = {
-  admin: {
+  'admin@xxx.com': {
     token: 'admin-token'
   },
-  editor: {
+  'editor@xxx.com': {
     token: 'editor-token'
   }
 }
@@ -26,7 +26,7 @@ const users = {
 module.exports = [
   // user login
   {
-    url: '/vue-element-admin/user/login',
+    url: '/user/login',
     type: 'post',
     response: config => {
       const { username } = config.body
@@ -49,7 +49,7 @@ module.exports = [
 
   // get user info
   {
-    url: '/vue-element-admin/user/info\.*',
+    url: '/user/info\.*',
     type: 'get',
     response: config => {
       const { token } = config.query
@@ -72,12 +72,38 @@ module.exports = [
 
   // user logout
   {
-    url: '/vue-element-admin/user/logout',
+    url: '/user/logout',
     type: 'post',
     response: _ => {
       return {
         code: 20000,
         data: 'success'
+      }
+    }
+  },
+
+  // user roles info
+  {
+    url: '/user/role_info_list',
+    type: 'post',
+    response: _ => {
+      const role_list = [{name: 'admin', description: 'admin'}]
+      return {
+        code: 20000,
+        data: role_list
+      }
+    }
+  },
+
+  // user log
+  {
+    url: '/user/log',
+    type: 'post',
+    response: _ => {
+      const logs = [{"id":2,"owner":2,"log_type":"logout","log_content":"logout","create_time":"2021-05-19 17:33:28"},{"id":1,"owner":2,"log_type":"login","log_content":"login","create_time":"2021-05-19 17:33:24"}]
+      return {
+        code: 20000,
+        data: logs
       }
     }
   }
